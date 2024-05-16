@@ -1,1 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
+// reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+// vars
+$green: rgba(42, 79, 71);
+$green-opacity: rgba(99, 113, 110, 0.899);
+$gray: #262626;
+$blue: rgb(79, 79, 204);
+
+// class
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: white;
+}
+
+// mixings
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// resposive mixings
+@mixin mobile {
+  @media screen and (max-width: 480px) {
+    @content;
+  }
+}
+
+@mixin small-mobile {
+  @media screen and (max-width: 389px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 481px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin std-height {
+  @media (min-height: 520px) and (max-height: 600px) {
+    @content;
+  }
+}

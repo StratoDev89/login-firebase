@@ -1,0 +1,15 @@
+<main>
+  <div>
+    <div class="login">
+      <p class="title">login to start chat</p>
+      <button (click)="login()">
+        <img src="assets/images/google-btn.svg" alt="login google" />
+      </button>
+      @if (isError()) {
+        <div class="error-message">
+          <p>error en el login</p>
+        </div>
+      }
+    </div>
+  </div>
+</main>

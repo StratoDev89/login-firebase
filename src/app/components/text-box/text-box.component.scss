@@ -1,0 +1,67 @@
+@use "../../../styles.scss" as s;
+
+form {
+  @include s.flex-center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+  background-color: s.$green-opacity;
+
+  @include s.mobile {
+    border-radius: 10px;
+    margin-top: 0.5rem;
+  }
+}
+
+div:nth-child(1) {
+  display: flex;
+  flex: 800px 1 1;
+  height: 2.5rem;
+
+  input {
+    padding: 0.5rem;
+    border: none;
+    height: 100%;
+    flex-grow: 1;
+    border-radius: 10px;
+    font-size: clamp(0.6em, 0.8vw, 1em);
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+div:nth-child(2) {
+  display: flex;
+  width: fit-content;
+  height: 2.5rem;
+
+  button {
+    padding: 0.5rem 0.8rem;
+    border-radius: 10px;
+
+    img {
+      height: 80%;
+    }
+  }
+}
+
+div:nth-child(3) {
+  display: flex;
+  width: fit-content;
+  height: 2.5rem;
+
+  button {
+    padding: 0.5rem 2rem;
+    border-radius: 10px;
+    color: black;
+    text-transform: capitalize;
+    font-size: clamp(0.7em, 0.9vw, 1em);
+  }
+}

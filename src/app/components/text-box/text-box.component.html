@@ -1,0 +1,25 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <input
+      type="text"
+      placeholder="Coloca tu consulta..."
+      autofocus="true"
+      formControlName="prompt"
+    />
+  </div>
+  <div>
+    <button type="button" (click)="fileInput.click()">
+      <img src="assets/images/paperclip.svg" alt="choose file" />
+    </button>
+    <input
+      #fileInput
+      type="file"
+      hidden
+      (change)="handleSelectedFile($event)"
+    />
+  </div>
+
+  <div>
+    <button type="submit" class="montserrat">enviar</button>
+  </div>
+</form>

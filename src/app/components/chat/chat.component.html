@@ -1,0 +1,20 @@
+<main>
+  <div class="chat-container">
+    <div class="chat-messages" #chatContainer>
+      @for (message of messages(); track message.text) {
+        @if (message.isGpt) {
+          <app-chat-message [text]="message.text" />
+        } @else {
+          <app-my-chat-message [text]="message.text" />
+        }
+      }
+      @if (isLoading()) {
+        <app-loader />
+      }
+    </div>
+
+    <div class="text-box">
+      <app-text-box (onMessage)="onMessage($event)" />
+    </div>
+  </div>
+</main>
