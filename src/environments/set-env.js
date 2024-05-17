@@ -2,7 +2,7 @@ function setEnv() {
   fs = require("fs");
   writeFile = fs.writeFile;
 
-  targetPath = "./src/environments/environments.dev.json";
+  targetPath = "./src/environments/environment.dev.json";
   envConfigFile = process.env.FIREBASE;
 
   console.log(

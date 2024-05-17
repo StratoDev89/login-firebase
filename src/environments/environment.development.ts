@@ -1,4 +1,4 @@
-import * as FIREBASE from './environments.dev.json';
+import * as FIREBASE from './environment.dev.json';
 
 export const environment = {
   production: false,
