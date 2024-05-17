@@ -69,5 +69,7 @@ export class ChatComponent {
     this.messages.update((prev) => [...prev, message]);
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.authServ.logoutGoogle();
+  }
 }
