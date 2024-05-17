@@ -21,12 +21,14 @@ export class AuthService {
   currentUser = signal<User | null | undefined>(undefined);
 
   loginGoogle() {
-    const promise = signInWithPopup(this.firebaseAuth, new GoogleAuthProvider());
-    return from(promise)
+    const promise = signInWithPopup(
+      this.firebaseAuth,
+      new GoogleAuthProvider(),
+    );
+    return from(promise);
   }
 
-  logoutGoogle() {
-    const promise = signOut(this.firebaseAuth);
-    return from(promise);
+  async logoutGoogle() {
+    await signOut(this.firebaseAuth);
   }
 }
