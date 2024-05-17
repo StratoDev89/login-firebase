@@ -14,9 +14,6 @@ export class AppComponent {
   authServ = inject(AuthService);
 
   ngOnInit(): void {
-
-    console.log(this.authServ.currentUser());
-
     this.authServ.user$.subscribe({
       next: (data) => {
         if (data) {
@@ -28,9 +25,7 @@ export class AppComponent {
           this.authServ.currentUser.set(null);
         }
       },
-      error: (err) => {
-        console.log(err);
-      },
+      error: (err) => {},
     });
   }
 }
