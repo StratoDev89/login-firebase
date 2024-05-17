@@ -1,5 +1,5 @@
-import { Component, Input, signal } from '@angular/core';
-import { User } from '../login/login.component';
+import { Component, Input, inject, signal } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-my-chat-message',
@@ -11,13 +11,13 @@ import { User } from '../login/login.component';
 export class MyChatMessageComponent {
   @Input({ required: true }) text!: string;
   photoURL = signal<string | null>(null);
+  authServ = inject(AuthService);
 
   ngOnInit(): void {
-    const user = localStorage.getItem('user');
+    const user = this.authServ.currentUser();
 
-    if (user) {
-      const { photoURL } = JSON.parse(user) as User;
-      this.photoURL.set(photoURL ? photoURL : null);
+    if (user?.photoURL) {
+      this.photoURL.set(user.photoURL);
     }
   }
 }

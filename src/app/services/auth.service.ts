@@ -1,13 +1,32 @@
-import { Injectable, inject } from '@angular/core';
-import { Auth, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
+import { Injectable, inject, signal } from '@angular/core';
+import {
+  Auth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  user,
+  signOut,
+} from '@angular/fire/auth';
+import { from } from 'rxjs';
 
+export interface User {
+  displayName: string;
+  photoURL?: string;
+}
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private auth = inject(Auth);
+  private firebaseAuth = inject(Auth);
+  user$ = user(this.firebaseAuth);
+  currentUser = signal<User | null | undefined>(undefined);
 
   loginGoogle() {
-    return signInWithPopup(this.auth, new GoogleAuthProvider());
+    const promise = signInWithPopup(this.firebaseAuth, new GoogleAuthProvider());
+    return from(promise)
+  }
+
+  logoutGoogle() {
+    const promise = signOut(this.firebaseAuth);
+    return from(promise);
   }
 }

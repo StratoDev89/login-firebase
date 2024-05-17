@@ -1,4 +1,10 @@
-import { Component, ElementRef, ViewChild, signal } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  inject,
+  signal,
+} from '@angular/core';
 import { ChatMessageComponent } from '../chat-message/chat-message.component';
 import { MyChatMessageComponent } from '../my-chat-message/my-chat-message.component';
 import { LoaderComponent } from '../loader/loader.component';
@@ -6,7 +12,7 @@ import {
   TextBoxComponent,
   textMessageEvent,
 } from '../text-box/text-box.component';
-import { User } from '../login/login.component';
+import { AuthService, User } from '../../services/auth.service';
 
 export interface Message {
   text: string;
@@ -26,24 +32,17 @@ export interface Message {
   styleUrl: './chat.component.scss',
 })
 export class ChatComponent {
-  user: User | null = null;
+  user: User | null | undefined = null;
   isLoading = signal(false);
   messages = signal<Message[]>([]);
+  authServ = inject(AuthService);
 
   @ViewChild('chatContainer', { static: true })
   private chatContainer!: ElementRef;
 
   ngOnInit(): void {
-    const data = localStorage.getItem('user');
-
-    if (data) {
-      this.user = JSON.parse(data);
-      this.addFirstMessage();
-    }
-
-    window.addEventListener('beforeunload', () => {
-      localStorage.removeItem('user');
-    });
+    this.user = this.authServ.currentUser();
+    this.addFirstMessage();
   }
 
   scrollToBottom(): void {
@@ -70,7 +69,5 @@ export class ChatComponent {
     this.messages.update((prev) => [...prev, message]);
   }
 
-  ngOnDestroy(): void {
-    localStorage.removeItem('user');
-  }
+  ngOnDestroy(): void {}
 }

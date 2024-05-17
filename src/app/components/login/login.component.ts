@@ -3,12 +3,6 @@ import { AuthService } from '../../services/auth.service';
 import { LoaderComponent } from '../loader/loader.component';
 import { Router } from '@angular/router';
 
-export interface User {
-  displayName?: string;
-  photoURL?: string;
-  uid?: string;
-}
-
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -23,22 +17,14 @@ export class LoginComponent {
   isError = signal(false);
 
   login() {
-    this.authServ
-      .loginGoogle()
-      .then((res) => {
+    this.authServ.loginGoogle().subscribe({
+      next: () => {
         this.isError.set(false);
-
-        const user: User = {
-          displayName: res.user.displayName ?? 'user',
-          photoURL: res.user.photoURL ?? undefined,
-          uid: res.user.uid,
-        };
-
-        localStorage.setItem('user', JSON.stringify(user));
         this.router.navigate(['chat']);
-      })
-      .catch((err) => {
+      },
+      error: (err) => {
         this.isError.set(true);
-      });
+      },
+    });
   }
 }
